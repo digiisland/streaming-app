@@ -3,14 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <groupId>org.trustedanalytics.atk</groupId>
-    <name>stream</name>
+    <name>Streaming simulator</name>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>stream</artifactId>
+    <artifactId>simulate-streaming</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <url>http://maven.apache.org</url>
     <description>
-        Streaming simulator app
+        Application that simulates a real-time stream from a file
     </description>
     <repositories>
         <repository>
@@ -25,7 +24,6 @@
         </repository>
         <repository>
             <id>cloudera cdh</id>
-            <!--<url>https://repository.cloudera.com/artifactory/cloudera-repos</url>-->
             <url>https://repository.cloudera.com/cloudera/cloudera-repos/</url>
             <releases>
                 <enabled>true</enabled>
@@ -79,13 +77,7 @@
     <properties>
         <scala.long.version>2.10.4</scala.long.version>
         <scala.short.version>2.10</scala.short.version>
-
         <dep.cdh.version>cdh5.5.1</dep.cdh.version>
-        <!--<dep.spark.version>1.3.0-${dep.cdh.version}</dep.spark.version>-->
-        <!--<dep.spark.yarn.version>1.3.0-${dep.cdh.version}</dep.spark.yarn.version>-->
-        <!--<dep.mahout.version>0.9</dep.mahout.version>-->
-        <!--<dep.parquet.version>1.5.0-${dep.cdh.version}</dep.parquet.version>-->
-        <!--<dep.hbase.version>1.0.0-${dep.cdh.version}</dep.hbase.version>-->
         <dep.hadoop2.version>2.6.0-${dep.cdh.version}</dep.hadoop2.version>
         <akka.version>2.3.2</akka.version>
     </properties>
@@ -278,7 +270,6 @@
     </build>
 
     <dependencies>
-
         <dependency>
             <groupId>com.typesafe.akka</groupId>
             <artifactId>akka-actor_${scala.short.version}</artifactId>
@@ -381,11 +372,6 @@
             <artifactId>hadoop-hdfs</artifactId>
             <version>${dep.hadoop2.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.apache.hadoop</groupId>-->
-            <!--<artifactId> hadoop-core</artifactId>-->
-            <!--<version>2.6.0-mr1-cdh5.4.4</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka_2.10</artifactId>
@@ -406,8 +392,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-
         <dependency>
             <groupId>org.trustedanalytics</groupId>
             <artifactId>hadoop-utils</artifactId>
