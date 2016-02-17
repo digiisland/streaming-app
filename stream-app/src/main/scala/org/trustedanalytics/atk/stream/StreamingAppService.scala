@@ -41,7 +41,6 @@ class StreamingAppServiceActor(val streamAppService: StreamingAppService) extend
   override def actorRefFactory = context
 
   /**
-   * Delegates to Formosa demo Service.
    *
    * This actor only runs our route, but you could add other things here, like
    * request stream processing or timeout handling
@@ -67,7 +66,7 @@ class StreamingAppService(simulator: Simulator) extends Directives {
   }
 
   lazy val description = {
-    new ServiceDescription(name = "Trusted Analytics",
+    new ServiceDescription(name = "Streaming simulator",
       identifier = "ia",
       versions = List("v1"))
   }

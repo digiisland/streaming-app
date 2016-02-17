@@ -35,18 +35,15 @@ import com.typesafe.config.{ Config, ConfigFactory }
 
 object StreamProducer extends App {
 
-  var config: Config = ConfigFactory.load()
-  var archiveName: String = null
-  var modelName: String = null
-  var ModelBytesFileName: String = null
+  var config: Config = null
 
   override def main(args: Array[String]): Unit = {
 
-    config = ConfigFactory.load()
+    val config = ConfigFactory.load()
 
-    val broker: String = config.getString("trustedanalytics.stream.broker")
-    val topic: String = config.getString("trustedanalytics.stream.topic")
-    var dataFile: String = config.getString("trustedanalytics.stream.stream-data")
+    val broker: String = config.getString("trustedanalytics.simulate-streaming.broker")
+    val topic: String = config.getString("trustedanalytics.simulate-streaming.topic")
+    var dataFile: String = config.getString("trustedanalytics.simulate-streaming.stream-data")
 
     System.out.println("Brokers: " + broker)
     System.out.println("Topic: " + topic)
@@ -63,11 +60,11 @@ object StreamProducer extends App {
    */
   private def createActorSystemAndBindToHttp(streamingService: StreamingAppService): Unit = {
     // create the system
-    implicit val system = ActorSystem("stream-app")
+    implicit val system = ActorSystem("simulate-streaming")
     implicit val timeout = Timeout(5.seconds)
-    val service = system.actorOf(Props(new StreamingAppServiceActor(streamingService)), "stream-app")
+    val service = system.actorOf(Props(new StreamingAppServiceActor(streamingService)), "simulate-streaming")
     // Bind the Spray Actor to an HTTP Port
     // start a new HTTP server with our service actor as the handler
-    IO(Http) ? Http.Bind(service, interface = config.getString("trustedanalytics.atk.stream-app.host"), port = config.getInt("trustedanalytics.atk.stream-app.port"))
+    IO(Http) ? Http.Bind(service, interface = config.getString("trustedanalytics.atk.simulate-streaming.host"), port = config.getInt("trustedanalytics.atk.simulate-streaming.port"))
   }
 }
